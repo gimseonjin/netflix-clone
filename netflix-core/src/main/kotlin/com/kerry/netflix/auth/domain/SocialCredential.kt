@@ -14,5 +14,4 @@ class SocialCredential(
     @Column(name = "provider_user_id", nullable = false)
     var providerUserId: String = "",
 
-    override val type: String = "SOCIAL"
 ) : AuthCredential()

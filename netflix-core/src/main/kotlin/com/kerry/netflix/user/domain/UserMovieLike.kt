@@ -9,9 +9,6 @@ class UserMovieLike(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @Column(name = "USER_ID")
-    var userId: Long,
-
     @Column(name = "MOVIE_ID")
     var movieId: Long,
 

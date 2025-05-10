@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: netflix-core
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:postgresql://localhost:5432/netplix
+      driver-class-name: org.postgresql.Driver
+      username: netplix_user
+      password: netplix_password
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    generate-ddl: false
+    open-in-view: false
+    show-sql: true

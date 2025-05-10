@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: netflix-api
+
+  config:
+    import:
+      - classpath:application-db.yml

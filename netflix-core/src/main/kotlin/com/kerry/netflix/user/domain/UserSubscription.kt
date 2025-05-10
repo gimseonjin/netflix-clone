@@ -10,9 +10,6 @@ class UserSubscription(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(name = "USER_ID", nullable = false)
-    val userId: String,
-
     @Enumerated(EnumType.STRING)
     @Column(name = "SUBSCRIPTION_NAME", nullable = false)
     val subscriptionName: UserSubscriptionType,

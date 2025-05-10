@@ -7,16 +7,17 @@ import jakarta.persistence.*
 class Movie(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var movieId: Long? = null,
+    var id: Long? = null,
 
     @Column(name = "MOVIE_NAME")
-    var movieName: String,
+    var title: String,
 
     @Column(name = "IS_ADULT")
     var isAdult: Boolean,
 
     @Column(name = "GENRE")
-    var genre: String,
+    @Enumerated(EnumType.STRING)
+    var genre: MovieGenre,
 
     @Column(name = "OVERVIEW", columnDefinition = "TEXT")
     var overview: String,

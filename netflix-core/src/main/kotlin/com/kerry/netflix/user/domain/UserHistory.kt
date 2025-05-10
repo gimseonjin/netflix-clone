@@ -9,9 +9,6 @@ class UserHistory(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @Column(name = "USER_ID", nullable = false)
-    var userId: Long,
-
     @Column(name = "USER_ROLE", nullable = false)
     var userRole: String,
 

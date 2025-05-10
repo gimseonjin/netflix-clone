@@ -13,5 +13,4 @@ class EmailCredential(
     @Column(name = "password_hash", nullable = false)
     var passwordHash: String = "",
 
-    override val type: String = "EMAIL"
 ) : AuthCredential()
