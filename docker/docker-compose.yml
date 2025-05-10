@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres:15
+    container_name: netplix-postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: netplix
+      POSTGRES_USER: netplix_user
+      POSTGRES_PASSWORD: netplix_password
+      TZ: Asia/Seoul
+    volumes:
+      - ./db/postgresql/data:/var/lib/postgresql/data
+      - ./db/postgresql/init:/docker-entrypoint-initdb.d
+    platform: linux/x86_64
+
+  redis:
+    container_name: netplix-redis
+    hostname: redis
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    command: redis-server
+    restart: always
