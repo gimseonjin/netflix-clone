@@ -1,4 +1,4 @@
-package com.kerry.api
+package com.kerry.netflix
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

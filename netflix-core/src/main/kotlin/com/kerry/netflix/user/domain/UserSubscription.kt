@@ -1,4 +1,4 @@
-package com.kerry.core.user.domain
+package com.kerry.netflix.user.domain
 
 import jakarta.persistence.*
 import java.time.LocalDateTime

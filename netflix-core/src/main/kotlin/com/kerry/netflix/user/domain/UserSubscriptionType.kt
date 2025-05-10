@@ -1,4 +1,4 @@
-package com.kerry.core.user.domain
+package com.kerry.netflix.user.domain
 
 enum class UserSubscriptionType(val desc: String) {
     FREE("무료 구독권"),

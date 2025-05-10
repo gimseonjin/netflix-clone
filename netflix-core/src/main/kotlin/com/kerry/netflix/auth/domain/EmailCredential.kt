@@ -1,4 +1,4 @@
-package com.kerry.core.auth.domain
+package com.kerry.netflix.auth.domain
 
 import jakarta.persistence.Column
 import jakarta.persistence.DiscriminatorValue

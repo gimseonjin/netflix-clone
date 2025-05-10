@@ -1,4 +1,4 @@
-package com.kerry.core.movie.domain
+package com.kerry.netflix.movie.domain
 
 import jakarta.persistence.*
 
