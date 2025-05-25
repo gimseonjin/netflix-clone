@@ -1,7 +1,7 @@
 package com.kerry.netflix.tmdb
 
 import com.kerry.netflix.movie.domain.MovieClient
-import com.kerry.netflix.movie.domain.PageableMovies
+import com.kerry.netflix.movie.application.inp.dto.PageableMovies
 import com.kerry.netflix.util.toObject
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpMethod

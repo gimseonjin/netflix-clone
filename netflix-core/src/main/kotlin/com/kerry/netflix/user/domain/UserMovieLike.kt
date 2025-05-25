@@ -1,5 +1,6 @@
 package com.kerry.netflix.user.domain
 
+import com.kerry.netflix.base.BaseDomain
 import jakarta.persistence.*
 
 @Entity
@@ -14,7 +15,7 @@ class UserMovieLike(
 
     @Column(name = "LIKE_YN")
     var likeYn: Boolean
-) {
+): BaseDomain() {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", nullable = false)

@@ -1,4 +1,6 @@
-package com.kerry.netflix.movie.domain
+package com.kerry.netflix.movie.application.inp.dto
+
+import com.kerry.netflix.movie.domain.Movie
 
 class PageableMovies(
     val movies: List<Movie>,

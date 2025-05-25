@@ -1,5 +1,6 @@
 package com.kerry.netflix.movie.domain
 
+import com.kerry.netflix.base.BaseDomain
 import jakarta.persistence.*
 
 @Entity
@@ -24,4 +25,4 @@ class Movie(
 
     @Column(name = "RELEASED_AT")
     var releasedAt: String
-)
+): BaseDomain()

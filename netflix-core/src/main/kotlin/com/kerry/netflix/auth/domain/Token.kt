@@ -1,11 +1,12 @@
 package com.kerry.netflix.auth.domain
 
+import com.kerry.netflix.base.BaseDomain
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "tokens")
-class Token(
+class Token (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TOKEN_ID")
@@ -25,4 +26,4 @@ class Token(
 
     @Column(name = "REFRESH_TOKEN_EXPIRES_AT", nullable = false)
     var refreshTokenExpiresAt: LocalDateTime = LocalDateTime.now()
-)
+): BaseDomain()

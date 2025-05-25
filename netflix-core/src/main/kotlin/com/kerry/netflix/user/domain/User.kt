@@ -1,5 +1,6 @@
 package com.kerry.netflix.user.domain
 
+import com.kerry.netflix.base.BaseDomain
 import jakarta.persistence.*
 
 @Entity
@@ -20,7 +21,7 @@ class User(
 
     @Column(name = "PHONE", nullable = false)
     var phone: String,
-) {
+): BaseDomain() {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val histories: MutableList<UserHistory> = mutableListOf()
 

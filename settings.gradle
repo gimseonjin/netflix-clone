@@ -18,6 +18,7 @@ pluginManagement {
 rootProject.name = 'netflix-clone'
 
 include('netflix-apps:api')
+include('netflix-apps:batch')
 include('netflix-core')
 include('netflix-infra:http-client')
 include('netflix-frontend')

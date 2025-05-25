@@ -1,5 +1,6 @@
 package com.kerry.netflix.auth.domain
 
+import com.kerry.netflix.base.BaseDomain
 import jakarta.persistence.*
 
 @Entity
@@ -10,7 +11,7 @@ class AuthAccount(
 
     @Column(name = "user_id", nullable = false, unique = true)
     var userId: Long
-) {
+): BaseDomain() {
     @OneToOne(
         mappedBy = "account",
         cascade = [CascadeType.ALL],

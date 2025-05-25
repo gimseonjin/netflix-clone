@@ -1,0 +1,15 @@
+### 영화 검색 (page = 0)
+POST http://localhost:8080/api/v1/movie/search?page=0
+Content-Type: application/json
+
+###
+
+### 영화 검색 (page = 1)
+POST http://localhost:8080/api/v1/movie/search?page=1
+Content-Type: application/json
+
+###
+
+### 영화 검색 (page = 2)
+POST http://localhost:8080/api/v1/movie/search?page=2
+Content-Type: application/json

@@ -1,5 +1,6 @@
 package com.kerry.netflix.user.domain
 
+import com.kerry.netflix.base.BaseDomain
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -22,7 +23,7 @@ class UserSubscription(
 
     @Column(name = "VALID_YN", nullable = false)
     val validYn: Boolean
-) {
+): BaseDomain() {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", nullable = false)

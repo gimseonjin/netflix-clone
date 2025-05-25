@@ -1,5 +1,6 @@
 package com.kerry.netflix.user.domain
 
+import com.kerry.netflix.base.BaseDomain
 import jakarta.persistence.*
 
 @Entity
@@ -26,7 +27,7 @@ class UserHistory(
 
     @Column(name = "REQ_PAYLOAD", columnDefinition = "TEXT", nullable = false)
     var reqPayload: String
-) {
+): BaseDomain() {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", nullable = false)
     lateinit var user: User

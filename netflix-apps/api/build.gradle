@@ -20,6 +20,8 @@ repositories {
 
 dependencies {
     implementation project(':netflix-core')
+    implementation project(':netflix-common')
+    implementation project(':netflix-infra:http-client')
     implementation project(':config')
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
