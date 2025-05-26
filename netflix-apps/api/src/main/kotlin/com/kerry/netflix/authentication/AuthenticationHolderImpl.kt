@@ -1,5 +1,6 @@
 package com.kerry.netflix.authentication
 
+import com.kerry.netflix.base.RequestedByProvider
 import org.springframework.stereotype.Component
 
 @Component

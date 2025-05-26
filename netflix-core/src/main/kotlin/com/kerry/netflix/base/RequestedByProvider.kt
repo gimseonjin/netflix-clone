@@ -1,4 +1,4 @@
-package com.kerry.netflix.authentication
+package com.kerry.netflix.base
 
 interface RequestedByProvider {
     fun getRequestedBy(): String?

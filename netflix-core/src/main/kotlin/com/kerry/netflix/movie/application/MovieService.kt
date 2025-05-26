@@ -4,6 +4,8 @@ import com.kerry.netflix.movie.application.inp.ReadMovies
 import com.kerry.netflix.movie.domain.MovieClient
 import com.kerry.netflix.movie.domain.MovieRepository
 import com.kerry.netflix.movie.application.inp.dto.PageableMovies
+import com.kerry.netflix.movie.domain.Movie
+import com.linecorp.kotlinjdsl.dsl.jpql.jpql
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 

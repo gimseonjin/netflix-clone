@@ -17,6 +17,11 @@ java {
 
 repositories {
 	mavenCentral()
+	maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+ext {
+	jdslVersion = '3.5.5'
 }
 
 dependencies {
@@ -26,6 +31,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation("com.linecorp.kotlin-jdsl:jpql-dsl:$jdslVersion")
+	implementation("com.linecorp.kotlin-jdsl:jpql-render:$jdslVersion")
+	implementation("com.linecorp.kotlin-jdsl:spring-data-jpa-support:$jdslVersion")
 }
 
 kotlin {

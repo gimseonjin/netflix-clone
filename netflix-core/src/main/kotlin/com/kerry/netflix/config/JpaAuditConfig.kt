@@ -3,7 +3,10 @@ package com.kerry.netflix.config
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 
-@EnableJpaAuditing()
+@EnableJpaAuditing(
+    auditorAwareRef = "requestedByAuditorAware",
+    dateTimeProviderRef = "requestedAtAuditorAware"
+)
 @Configuration
 class JpaAuditConfig {
 }
