@@ -33,10 +33,12 @@ class SecurityConfig(
 
         httpSecurity.authorizeHttpRequests {
             it.requestMatchers("/api/v1/user/register").permitAll()
+            it.requestMatchers("/api/v1/user/login").permitAll()
+            it.requestMatchers("/api/v1/user/callback").permitAll()
             it.anyRequest().authenticated()
         }
 
-//        httpSecurity.oauth2Login{ it.failureUrl("/login?error=true") }
+        httpSecurity.oauth2Login{ it.failureUrl("/login?error=true") }
 
         return httpSecurity.build()
     }

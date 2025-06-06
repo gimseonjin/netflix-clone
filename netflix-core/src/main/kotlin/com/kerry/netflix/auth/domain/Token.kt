@@ -13,7 +13,7 @@ class Token (
     var tokenId: Long? = null,
 
     @Column(name = "USER_ID", nullable = false)
-    var userId: Long,
+    var userId: String,
 
     @Column(name = "ACCESS_TOKEN", nullable = false)
     var accessToken: String,

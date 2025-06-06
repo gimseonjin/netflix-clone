@@ -9,9 +9,9 @@ import jakarta.persistence.Entity
 class SocialCredential(
 
     @Column(name = "provider", nullable = false)
-    var provider: String = "",
+    var provider: String,
 
     @Column(name = "provider_user_id", nullable = false)
-    var providerUserId: String = "",
+    var providerUserId: Long,
 
 ) : AuthCredential()
