@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Architecture
+
+## Directory Structure
+
+> Works with React and bootstrap
+
+```text
+matrix-os/
+├─ public/                 # Static assets copied as-is
+├─ src/
+|   └─ pages/               # React Pages
+├─ package.json
+└─ .env                     # Build-time env vars (never secrets)
+```
+
+### Building Blocks Responsibility
+
+- **src/pages**: Contains React components for each application route or view. Each file under this directory represents a top-level page rendered by the router, and is styled using Bootstrap.
