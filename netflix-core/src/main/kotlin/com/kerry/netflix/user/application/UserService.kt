@@ -1,5 +1,6 @@
 package com.kerry.netflix.user.application
 
+import com.kerry.netflix.exception.UserException
 import com.kerry.netflix.user.application.inp.ReadUser
 import com.kerry.netflix.user.domain.User
 import com.kerry.netflix.user.domain.UserRepository
@@ -12,6 +13,6 @@ class UserService(
 
     override fun findByUsername(username: String): User {
         return userRepository.findByUsername(username)
-            ?: throw IllegalArgumentException("User with username $username not found")
+            ?: throw UserException.UserNotFoundException(username)
     }
 }
