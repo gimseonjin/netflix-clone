@@ -1,13 +1,16 @@
 package com.kerry.netflix.controller.user
 
 import com.kerry.netflix.ApiResponse
+import com.kerry.netflix.auth.application.inp.CreateAuthAccount
 import com.kerry.netflix.auth.application.inp.ReadToken
+import com.kerry.netflix.auth.application.inp.UpdateToken
+import com.kerry.netflix.auth.domain.Token
 import com.kerry.netflix.controller.user.req.UserLoginReq
 import com.kerry.netflix.controller.user.req.UserRegisterReq
 import com.kerry.netflix.controller.user.res.UserRegisterRes
+import com.kerry.netflix.controller.user.res.UserTokenRes
 import com.kerry.netflix.user.application.inp.ReadUser
 import com.kerry.netflix.user.application.inp.RegisterUser
-import com.kerry.netflix.user.domain.User
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -18,6 +21,8 @@ class UserController(
     private val registerUser: RegisterUser,
     private val readUser: ReadUser,
     private val readToken: ReadToken,
+    private val updateToken: UpdateToken,
+    private val createAuthAccount: CreateAuthAccount,
     private val passwordEncoder: PasswordEncoder
 ) {
 
@@ -38,20 +43,41 @@ class UserController(
     }
 
     @PostMapping("/api/v1/user/login")
-    fun login(@RequestBody userLoginReq: UserLoginReq): ApiResponse<String> {
-        // Implement login logic here
-        // This is a placeholder for the actual login implementation
-        return ApiResponse.ok("access")
+    fun login(@RequestBody userLoginReq: UserLoginReq): ApiResponse<UserTokenRes> {
+        val user = readUser.findByUsername(userLoginReq.username)
+
+        passwordEncoder
+            .matches(userLoginReq.password, user.password)
+            .takeIf { it } ?: throw IllegalArgumentException("Invalid username or password")
+
+        val token: Token = updateToken.upsertToken(
+            userIdentifier = user.username
+        )
+        return ApiResponse.ok(UserTokenRes(
+            accessToken = token.accessToken,
+            refreshToken = token.refreshToken
+        ))
     }
 
     @PostMapping("/api/v1/user/callback")
-    fun callback(@RequestBody req: Map<String, String>): ApiResponse<User> {
+    fun callback(@RequestBody req: Map<String, String>): ApiResponse<UserTokenRes> {
         val code = req["code"] ?: throw IllegalArgumentException("Code is required")
 
         val accessToken = readToken.getTokenFromKakao(code)
-
         val user = readUser.getUserFromKakao(accessToken)
 
-        return ApiResponse.ok(user)
+        createAuthAccount.createSocialAuthAccount(
+            userId = user.id!!,
+            provider = user.provider!!,
+            providerId = user.providerUserId!!
+        )
+
+        val token = updateToken.upsertToken(
+            userIdentifier = user.providerUserId!!.toString()
+        )
+        return ApiResponse.ok(UserTokenRes(
+            accessToken = token.accessToken,
+            refreshToken = token.refreshToken
+        ))
     }
 }

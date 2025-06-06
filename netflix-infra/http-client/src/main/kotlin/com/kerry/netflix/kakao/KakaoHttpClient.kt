@@ -66,7 +66,9 @@ class KakaoHttpClient(
 
         return User(
             username = username,
-            email = email
+            email = email,
+            providerUserId = id,
+            provider = "kakao"
         )
     }
 }

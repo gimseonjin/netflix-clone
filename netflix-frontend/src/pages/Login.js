@@ -16,7 +16,7 @@ function Login({ setIsLoggedIn }) {
       const response = await axios.post(
         "http://localhost:8080/api/v1/user/login",
         {
-          email: username,
+          username,
           password,
         },
       );

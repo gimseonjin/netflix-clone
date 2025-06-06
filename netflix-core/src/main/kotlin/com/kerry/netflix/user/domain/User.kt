@@ -21,6 +21,12 @@ class User(
 
     @Column(name = "PHONE", nullable = true)
     var phone: String? = null,
+
+    @Column(name = "PROVIDER", nullable = true)
+    val provider: String? = null,
+
+    @Column(name = "PROVIDER_USER_ID", nullable = true)
+    val providerUserId: Long? = null,
 ): BaseDomain() {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val histories: MutableList<UserHistory> = mutableListOf()

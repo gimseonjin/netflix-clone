@@ -7,10 +7,10 @@ import jakarta.persistence.Entity
 @Entity
 @DiscriminatorValue("EMAIL")
 class EmailCredential(
-    @Column(name = "email", nullable = false, unique = true)
-    var email: String = "",
+    @Column(name = "email", nullable = true, unique = true)
+    var email: String? = null,
 
-    @Column(name = "password_hash", nullable = false)
-    var passwordHash: String = "",
+    @Column(name = "password_hash", nullable = true)
+    var passwordHash: String? = null,
 
 ) : AuthCredential()

@@ -8,10 +8,10 @@ import jakarta.persistence.Entity
 @DiscriminatorValue("SOCIAL")
 class SocialCredential(
 
-    @Column(name = "provider", nullable = false)
-    var provider: String,
+    @Column(name = "provider", nullable = true)
+    var provider: String? = null,
 
-    @Column(name = "provider_user_id", nullable = false)
-    var providerUserId: Long,
+    @Column(name = "provider_user_id", nullable = true)
+    var providerUserId: Long? = null,
 
 ) : AuthCredential()

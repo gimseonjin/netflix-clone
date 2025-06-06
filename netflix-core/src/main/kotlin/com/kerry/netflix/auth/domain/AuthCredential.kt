@@ -10,8 +10,4 @@ import jakarta.persistence.*
 abstract class AuthCredential(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
-): BaseDomain() {
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "account_id", nullable = false, unique = true)
-    var account: AuthAccount? = null
-}
+): BaseDomain()

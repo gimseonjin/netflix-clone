@@ -1,6 +1,5 @@
 package com.kerry.netflix.auth.application
 
-import com.kerry.netflix.auth.application.inp.CreateToken
 import com.kerry.netflix.auth.application.inp.ReadToken
 import com.kerry.netflix.auth.application.inp.UpdateToken
 import com.kerry.netflix.auth.domain.KakaoTokenClient
@@ -24,36 +23,43 @@ class TokenService(
     private val secretKey: String,
     private val tokenRepository: TokenRepository,
     private val tokenClient: KakaoTokenClient
-) : ReadToken, CreateToken, UpdateToken {
-
-    override fun createNewToken(username: String, password: String): Token {
+) : ReadToken, UpdateToken {
+    override fun upsertToken(userIdentifier: String): Token {
+        val existingToken = tokenRepository.findByUserId(userIdentifier)
         val now = Instant.now()
 
         val accessDuration = Duration.ofMinutes(30)
         val refreshDuration = Duration.ofDays(7)
 
         val accessToken = getTokenByUsername(
-            username = username,
+            username = userIdentifier,
             now = now,
-            expireAt =  accessDuration
+            expireAt = accessDuration
         )
         val refreshToken = getTokenByUsername(
-            username = username,
+            username = userIdentifier,
             now = now,
             expireAt = refreshDuration
         )
-
         val accessTokenExpiresAt = LocalDateTime.ofInstant(now.plus(accessDuration), ZoneId.systemDefault())
         val refreshTokenExpiresAt = LocalDateTime.ofInstant(now.plus(refreshDuration), ZoneId.systemDefault())
 
-        val token = Token(
-            accessToken = accessToken,
-            refreshToken = refreshToken,
-            userId = username,
-            accessTokenExpiresAt = accessTokenExpiresAt,
-            refreshTokenExpiresAt = refreshTokenExpiresAt
-        )
-        return tokenRepository.save(token)
+        return if (existingToken != null) {
+            existingToken.accessToken = accessToken
+            existingToken.refreshToken = refreshToken
+            existingToken.accessTokenExpiresAt = accessTokenExpiresAt
+            existingToken.refreshTokenExpiresAt = refreshTokenExpiresAt
+            tokenRepository.save(existingToken)
+        } else {
+            val newToken = Token(
+                userId = userIdentifier,
+                accessToken = accessToken,
+                refreshToken = refreshToken,
+                accessTokenExpiresAt = accessTokenExpiresAt,
+                refreshTokenExpiresAt = refreshTokenExpiresAt
+            )
+            tokenRepository.save(newToken)
+        }
     }
 
     override fun validateToken(token: String): Boolean {

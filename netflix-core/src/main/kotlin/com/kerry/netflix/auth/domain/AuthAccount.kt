@@ -13,7 +13,6 @@ class AuthAccount(
     var userId: Long
 ): BaseDomain() {
     @OneToOne(
-        mappedBy = "account",
         cascade = [CascadeType.ALL],
         orphanRemoval = true
     )
