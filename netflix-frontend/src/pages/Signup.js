@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from "react-router-dom";
 
 function Signup() {
-    const [username, setUsername] = useState('');
+    const [nickname, setNickname] = useState('');
     const [email, setEmail] = useState('');
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
@@ -17,7 +17,7 @@ function Signup() {
         try {
             // /login API에 POST 요청
             const response = await axios.post('http://localhost:8080/api/v1/user/register', {
-                username,
+                nickname,
                 password: password1,
                 email,
                 phone
@@ -75,13 +75,13 @@ function Signup() {
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="username" className="form-label">사용자 명</label>
+                        <label htmlFor="nickname" className="form-label">사용자 명</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            id="nickname"
+                            value={nickname}
+                            onChange={(e) => setNickname(e.target.value)}
                             required
                         />
                     </div>

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service
 class UserDetailServiceImpl(
     private val readUser: ReadUser
 ): UserDetailsService {
-    override fun loadUserByUsername(username: String): AuthUser {
-        val user = readUser.findByUsername(username)
+    override fun loadUserByUsername(email: String): AuthUser {
+        val user = readUser.findByEmail(email)
         return AuthUser(
             id = user.id!!,
-            username = user.username,
+            username = user.email ?: user.providerUserId!!.toString(),
             password = user.password,
             phone = user.phone,
             email = user.email,

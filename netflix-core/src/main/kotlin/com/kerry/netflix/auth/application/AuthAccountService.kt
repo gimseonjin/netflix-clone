@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service
 class AuthAccountService(
     private val authAccountRepository: AuthAccountRepository
 ): CreateAuthAccount {
-    override fun createEmailAuthAccount(userId: Long, email: String): AuthAccount {
+    override fun createEmailAuthAccount(
+        userId: Long,
+        email: String
+    ): AuthAccount {
         if(authAccountRepository.existsByUserId(userId)) {
             return authAccountRepository.findByUserId(userId)!!
         }

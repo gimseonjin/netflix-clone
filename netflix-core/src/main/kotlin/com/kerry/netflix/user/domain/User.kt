@@ -10,8 +10,8 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @Column(name = "USER_NAME", nullable = false, unique = true)
-    var username: String,
+    @Column(name = "NICK_NAME", nullable = false, unique = true)
+    var nickname: String,
 
     @Column(name = "PASSWORD", nullable = true)
     var password: String? = null,

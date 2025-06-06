@@ -14,33 +14,33 @@ class UserService(
     private val kakaoUserClient: KakaoUserClient
 ): ReadUser, RegisterUser {
 
-    override fun findByUsername(username: String): User {
-        return userRepository.findByUsername(username)
-            ?: throw UserException.UserNotFoundException(username)
+    override fun findByEmail(email: String): User {
+        return userRepository.findUserByEmail(email)
+            ?: throw UserException.UserNotFoundException(email)
     }
 
     override fun getUserFromKakao(token: String): User {
         val user = kakaoUserClient.getUserFromKakao(token)
 
-        if (userRepository.existsByUsername(user.username)) {
-            return userRepository.findByUsername(user.username)!!
+        if (userRepository.existsByProviderUserId(user.providerUserId!!)) {
+            return userRepository.findUserByProviderUserId(user.providerUserId!!)!!
         }
 
         return userRepository.save(user)
     }
 
     override fun register(
-        username: String,
+        email: String,
+        nickname: String,
         password: String,
-        phone: String?,
-        email: String?
+        phone: String?
     ): User {
-        if (userRepository.existsByUsername(username)) {
-            throw UserException.UserAlreadyExistsException(username)
+        if (userRepository.existsByEmail(email)) {
+            throw UserException.UserAlreadyExistsException(email)
         }
 
         val user = User(
-            username = username,
+            nickname = nickname,
             password = password,
             phone = phone,
             email = email

@@ -3,6 +3,8 @@ package com.kerry.netflix.user.domain
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository: JpaRepository<User, Long> {
-    fun findByUsername(username: String): User?
-    fun existsByUsername(username: String): Boolean
+    fun findUserByEmail(email: String): User?
+    fun findUserByProviderUserId(providerUserId: Long): User?
+    fun existsByEmail(email: String): Boolean
+    fun existsByProviderUserId(providerUserId: Long): Boolean
 }

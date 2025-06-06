@@ -4,7 +4,7 @@ import com.kerry.netflix.user.domain.User
 
 interface ReadUser {
 
-    fun findByUsername(username: String): User
+    fun findByEmail(email: String): User
 
     fun getUserFromKakao(token: String): User
 }

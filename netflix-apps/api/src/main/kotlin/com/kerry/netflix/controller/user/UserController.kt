@@ -29,29 +29,32 @@ class UserController(
     @PostMapping("/api/v1/user/register")
     fun register(@RequestBody userRegisterReq: UserRegisterReq ): ApiResponse<UserRegisterRes> {
         val user = registerUser.register(
-            username = userRegisterReq.username,
+            nickname = userRegisterReq.nickname,
             password = passwordEncoder.encode(userRegisterReq.password),
             phone = userRegisterReq.phone,
-            email = userRegisterReq.email
+            email = userRegisterReq.email!!
         )
-        val response = UserRegisterRes(
-            username = user.username,
+        createAuthAccount.createEmailAuthAccount(
+            userId = user.id!!,
+            email = user.email!!
+        )
+        return ApiResponse.ok(UserRegisterRes(
+            username = user.nickname,
             phone = user.phone,
             email = user.email
-        )
-        return ApiResponse.ok(response)
+        ))
     }
 
     @PostMapping("/api/v1/user/login")
     fun login(@RequestBody userLoginReq: UserLoginReq): ApiResponse<UserTokenRes> {
-        val user = readUser.findByUsername(userLoginReq.username)
+        val user = readUser.findByEmail(userLoginReq.email)
 
         passwordEncoder
             .matches(userLoginReq.password, user.password)
             .takeIf { it } ?: throw IllegalArgumentException("Invalid username or password")
 
         val token: Token = updateToken.upsertToken(
-            userIdentifier = user.username
+            userIdentifier = user.nickname
         )
         return ApiResponse.ok(UserTokenRes(
             accessToken = token.accessToken,
