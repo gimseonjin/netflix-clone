@@ -16,11 +16,11 @@ class User(
     @Column(name = "PASSWORD", nullable = false)
     var password: String,
 
-    @Column(name = "EMAIL", nullable = false)
-    var email: String,
+    @Column(name = "EMAIL", nullable = true)
+    var email: String?,
 
-    @Column(name = "PHONE", nullable = false)
-    var phone: String,
+    @Column(name = "PHONE", nullable = true)
+    var phone: String?,
 ): BaseDomain() {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val histories: MutableList<UserHistory> = mutableListOf()

@@ -31,9 +31,12 @@ class SecurityConfig(
 
         httpSecurity.userDetailsService(userDetailService)
 
-        httpSecurity.authorizeHttpRequests { it.anyRequest().authenticated() }
+        httpSecurity.authorizeHttpRequests {
+            it.requestMatchers("/api/v1/user/register").permitAll()
+            it.anyRequest().authenticated()
+        }
 
-        httpSecurity.oauth2Login{ it.failureUrl("/login?error=true") }
+//        httpSecurity.oauth2Login{ it.failureUrl("/login?error=true") }
 
         return httpSecurity.build()
     }

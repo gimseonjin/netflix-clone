@@ -7,8 +7,8 @@ class AuthUser(
     private val id: Long,
     username: String,
     password: String,
-    private val phone: String,
-    private val email: String,
+    private val phone: String?,
+    private val email: String?,
     authorities: List<GrantedAuthority>
 ): User(
     username,

@@ -23,10 +23,10 @@ class RequestedByInterceptor(
     }
 
     override fun postHandle(request: WebRequest, model: ModelMap?) {
-        TODO("Not yet implemented")
+        // No post-processing needed
     }
 
     override fun afterCompletion(request: WebRequest, ex: Exception?) {
-        TODO("Not yet implemented")
+        authenticationHolder.clearAuthentication()
     }
 }

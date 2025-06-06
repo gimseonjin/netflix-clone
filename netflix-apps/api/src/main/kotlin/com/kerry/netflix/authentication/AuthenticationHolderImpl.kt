@@ -16,4 +16,8 @@ class AuthenticationHolderImpl : AuthenticationHolder, RequestedByProvider {
     override fun getRequestedBy(): String? {
         return authentication?.getRequestedBy()
     }
+
+    override fun clearAuthentication() {
+        authentication = null
+    }
 }

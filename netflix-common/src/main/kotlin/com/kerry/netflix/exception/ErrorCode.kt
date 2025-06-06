@@ -14,4 +14,9 @@ enum class ErrorCode(
         code = "1001",
         message = "User not found."
     ),
+
+    USER_ALREADY_EXISTS(
+        code = "1002",
+        message = "User already exists."
+    ),
 }

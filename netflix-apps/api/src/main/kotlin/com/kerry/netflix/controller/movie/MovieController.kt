@@ -1,4 +1,4 @@
-package com.kerry.netflix.movie
+package com.kerry.netflix.controller.movie
 
 import com.kerry.netflix.ApiResponse
 import com.kerry.netflix.movie.application.inp.ReadMovies

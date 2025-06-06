@@ -12,20 +12,26 @@ import java.time.LocalDateTime
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
-abstract class BaseDomain(
+abstract class BaseDomain {
+
+    // 클래스 바디 안에서 프로퍼티 선언 → protected set을 사용할 수 있음
     @CreatedDate
     @Column(name = "CREATED_AT", updatable = false)
-    private val createdAt: LocalDateTime? = null,
+    var createdAt: LocalDateTime? = null
+        protected set
 
     @CreatedBy
     @Column(name = "CREATED_BY", updatable = false)
-    private val createdBy: String? = null,
+    var createdBy: String? = null
+        protected set
 
     @LastModifiedDate
     @Column(name = "MODIFIED_AT")
-    private var modifiedAt: LocalDateTime? = null,
+    var modifiedAt: LocalDateTime? = null
+        protected set
 
     @LastModifiedBy
     @Column(name = "MODIFIED_BY")
-    private var modifiedBy: String? = null,
-)
+    var modifiedBy: String? = null
+        protected set
+}
