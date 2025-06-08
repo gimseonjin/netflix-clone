@@ -20,6 +20,11 @@ repositories {
 }
 
 dependencies {
+	implementation(project(':netflix-common'))
+	implementation(project(':netflix-core'))
+	implementation project(':netflix-infra:http-client')
+	implementation project(':config')
+
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
