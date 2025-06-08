@@ -6,13 +6,12 @@ import org.springframework.security.core.userdetails.User
 class AuthUser(
     private val id: Long,
     username: String,
-    password: String?,
-    private val phone: String?,
-    private val email: String?,
+    password: String? = null,
+    private val phone: String? = null,
+    private val email: String,
     authorities: List<GrantedAuthority>
 ): User(
     username,
-    password,
+    password ?: "",
     authorities
-) {
-}
+)

@@ -4,5 +4,5 @@ import com.kerry.netflix.auth.domain.Token
 
 interface UpdateToken {
 
-    fun upsertToken(userIdentifier: String): Token
+    fun upsertToken(email: String): Token
 }

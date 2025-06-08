@@ -24,5 +24,8 @@ class Movie(
     var overview: String,
 
     @Column(name = "RELEASED_AT")
-    var releasedAt: String
+    var releasedAt: String,
+
+    @Column(name = "POSTER_PATH")
+    var posterPath: String,
 ): BaseDomain()

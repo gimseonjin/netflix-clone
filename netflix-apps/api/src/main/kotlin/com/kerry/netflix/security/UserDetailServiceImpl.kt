@@ -13,7 +13,7 @@ class UserDetailServiceImpl(
         val user = readUser.findByEmail(email)
         return AuthUser(
             id = user.id!!,
-            username = user.email ?: user.providerUserId!!.toString(),
+            username = user.email,
             password = user.password,
             phone = user.phone,
             email = user.email,

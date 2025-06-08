@@ -54,7 +54,7 @@ class UserController(
             .takeIf { it } ?: throw IllegalArgumentException("Invalid username or password")
 
         val token: Token = updateToken.upsertToken(
-            userIdentifier = user.nickname
+            email = user.email
         )
         return ApiResponse.ok(UserTokenRes(
             accessToken = token.accessToken,
@@ -76,7 +76,7 @@ class UserController(
         )
 
         val token = updateToken.upsertToken(
-            userIdentifier = user.providerUserId!!.toString()
+            email = user.email
         )
         return ApiResponse.ok(UserTokenRes(
             accessToken = token.accessToken,

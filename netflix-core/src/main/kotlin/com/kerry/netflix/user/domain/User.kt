@@ -16,8 +16,8 @@ class User(
     @Column(name = "PASSWORD", nullable = true)
     var password: String? = null,
 
-    @Column(name = "EMAIL", nullable = true)
-    var email: String? = null,
+    @Column(name = "EMAIL", nullable = false, unique = true)
+    var email: String,
 
     @Column(name = "PHONE", nullable = true)
     var phone: String? = null,

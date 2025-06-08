@@ -24,20 +24,20 @@ class TokenService(
     private val tokenRepository: TokenRepository,
     private val tokenClient: KakaoTokenClient
 ) : ReadToken, UpdateToken {
-    override fun upsertToken(userIdentifier: String): Token {
-        val existingToken = tokenRepository.findByUserId(userIdentifier)
+    override fun upsertToken(email: String): Token {
+        val existingToken = tokenRepository.findByUserId(email)
         val now = Instant.now()
 
         val accessDuration = Duration.ofMinutes(30)
         val refreshDuration = Duration.ofDays(7)
 
-        val accessToken = getTokenByUsername(
-            username = userIdentifier,
+        val accessToken = getToken(
+            email = email,
             now = now,
             expireAt = accessDuration
         )
-        val refreshToken = getTokenByUsername(
-            username = userIdentifier,
+        val refreshToken = getToken(
+            email = email,
             now = now,
             expireAt = refreshDuration
         )
@@ -52,7 +52,7 @@ class TokenService(
             tokenRepository.save(existingToken)
         } else {
             val newToken = Token(
-                userId = userIdentifier,
+                userId = email,
                 accessToken = accessToken,
                 refreshToken = refreshToken,
                 accessTokenExpiresAt = accessTokenExpiresAt,
@@ -75,25 +75,25 @@ class TokenService(
         return tokenClient.getAccessToken(code)
     }
 
-    override fun getUsernameFromToken(token: String): String {
+    override fun getEmailFromToken(token: String): String {
         val claims = Jwts.parser()
             .verifyWith(getSigningKey())
             .build()
             .parseSignedClaims(token)
             .payload
 
-        return (claims["username"] as? String)
-            ?: throw IllegalArgumentException("토큰에 username 클레임이 없습니다.")
+        return (claims["email"] as? String)
+            ?: throw IllegalArgumentException("토큰에 email 클레임이 없습니다.")
     }
 
-    private fun getTokenByUsername(
-        username: String,
+    private fun getToken(
+        email: String,
         now: Instant,
         expireAt: Duration
     ): String {
         return Jwts.builder()
             .issuedAt(from(now))
-            .claim("username", username)
+            .claim("email", email)
             .expiration(from(now.plus(expireAt)))
             .signWith(getSigningKey())
             .compact()
